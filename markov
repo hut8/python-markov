@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+import sys
+import re
+import random
+
+markov_chain = {}
+words = None
+
+with open(sys.argv[1], 'rt') as f:
+    contents = f.read()
+    words = re.split('\s', contents)
+    for i in range(len(words) -1):
+        if i == 0:
+            next
+        if not words[i] in markov_chain:
+            markov_chain[words[i]] = []
+        markov_chain[words[i]].append(words[i+1])
+
+word = random.choice([w for w in words if re.match(r'^[A-Z]', w)])
+while True:
+    print(word, end=' ')
+    if re.match(r'.+\.$', word):
+        break
+    word = random.choice(markov_chain[word])
+print()
